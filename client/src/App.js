@@ -157,15 +157,18 @@ export default App;
 //add product to navbar and as a separate page (DONE)
 //addproduct bug (DONE)
 //auto logout (DONE)
+// view anyone's shop. (DONE)
+//update button to category name, add username to category (DONE)
 
 // organize shop
-//update button to category name, add username to category
-// personalize shop name (add field to model)
-// view anyone's shop.
+// update shop name
+//conditionally render categories on addProducts, ideally, you can't add to anyone's category
 // Add shopping cart to profile link, and as a new page, add products "user has many products".
 //select products from anyone's shop.
 // subtract from stock
 //add friends
+//add swap meet description on homepage/registration
+// add instructions on registration/registration
 
 // add checkout
 

@@ -76,11 +76,11 @@ const Registration = () => {
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <Form className="container">
         <div className="form-floating mb-3">
-          <Field className="form-control" autoComplete="off" id="inputCreatePost" name="username" placeholder="(Ex. John123...)" />
-          <label>Username</label>
+          <Field className="form-control openSans" autoComplete="off" id="inputCreatePost" name="username" placeholder="(Ex. John123...)" />
+          <label className="lobster">Shop Name</label>
           <ErrorMessage name="username" component="div" />
         </div>
-        <div className="form-floating mb-3">
+        <div className="form-floating mb-3 openSans">
           <Field className="form-control" autoComplete="off" id="inputCreatePost" name="password" type="password" placeholder="Your Password..." />
           <label htmlFor="">Password</label>
           <ErrorMessage name="password" component="span" />

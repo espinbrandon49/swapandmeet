@@ -33,11 +33,12 @@ const Login = () => {
     <div className="container">
       <FloatingLabel
         controlId="floatingInput"
-        label="Username"
-        className="mb-3"
+        label="Shop Name"
+        className="mb-3 lobster"
       >
         <Form.Control
           type="text"
+          className="openSans"
           placeholder="John123..."
           onChange={(event) => {
             setUsername(event.target.value);
@@ -48,7 +49,7 @@ const Login = () => {
       <FloatingLabel
         controlId="floatingPassword"
         label="Password"
-        className="mb-3"
+        className="mb-3 openSans"
       >
         <Form.Control
           type="password"

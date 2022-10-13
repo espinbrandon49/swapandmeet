@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
+import { AuthContext } from "../helpers/AuthContext";
 
 const styles = {
   width: {
@@ -19,6 +20,7 @@ const Profile = () => {
   const [userProducts, setUserProducts] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const navigate = useNavigate();
+  const { authState } = useContext(AuthContext)
 
   useEffect(() => {
     axios.get(`http://localhost:3001/api/auth/basicinfo/${id}`).then((response) => {
@@ -80,13 +82,12 @@ const Profile = () => {
         );
     }
     window.location.replace(`/category/${id}`)
-
   }
   
   return (
     <div className="container text-center">
       <div className="mb-3">
-        <h1 className="lobster">Your Shop</h1>
+        <h1 className="lobster">{authState.username === username ? "Your Shop" : username  }</h1>
         <img src={`http://localhost:3001/public/image-${image}`} style={styles.width} alt=" " />
       </div>
 
@@ -101,9 +102,12 @@ const Profile = () => {
                 navigate(`/category/${value.id}`);
               }}
             >
+
               <ListGroup.Item action variant="primary">
                 {value.category_name}
               </ListGroup.Item>
+
+
             </ListGroup>
           );
         })}

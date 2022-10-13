@@ -22,22 +22,20 @@ const Home = () => {
       axios.get('http://localhost:3001/api/categories').then((response) => {
         setCategories(response.data)
       })
-      // axios.get('http://localhost:3001/api/products').then((response) => {
-      //   setProducts(response.data)
-      // })
       navigate('/')
     }
   }, [])
 
-  // useEffect(() => {
-  //   setCategories([...categories])
-  // }, [setCategories])
-  // console.log(products)
-
   return (
     <div className='container'>
-      <h1 className='openSans my-4 p-2 yellowDotBorder' onClick={() => navigate(`/profile/${authState.id}`) }>Hello, {authState.username}</h1>
-      <div>
+
+      <div className='yellowDotBorder my-3 p-3 d-flex align-items-center'>
+      <h1 className='openSans' onClick={() => navigate(`/profile/${authState.id}`) }>Welcome, {authState.username}</h1>
+
+      <p className='lobster fs-5 text-muted'>A gathering at which enthusiasts or collectors trade or exchange items of common interest</p>
+      </div>
+      
+      <div className='w-75 mx-auto'>
         <ListGroup className='container text-center'>
           <ListGroup.Item variant="primary" ><h6 className='fw-bold openSans' >VIEW BY CATEGORY</h6></ListGroup.Item>
           {categories.map((value, key) => {
@@ -53,6 +51,7 @@ const Home = () => {
           })}
         </ListGroup>
       </div>
+
       <div className='m-4 bg-light rounded-top ' >
         <h5 className="openSans bg-secondary p-3 text-light rounded-top">Add A Category</h5>
         <AddCategory />
