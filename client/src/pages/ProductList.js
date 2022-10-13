@@ -7,7 +7,7 @@ import { AuthContext } from "../helpers/AuthContext";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const ProductList = () => {
+const ProductList = ({singleCategory}) => {
   let { id } = useParams();
   const [products, setProducts] = useState([]);
   const [tags, setTags] = useState([]);
@@ -20,7 +20,6 @@ const ProductList = () => {
       setAllCategories(response.data);
     })
 
-
     axios.get(`http://localhost:3001/api/products/${id}`).then((response) => {
       setProducts(response.data);
     });
@@ -30,7 +29,6 @@ const ProductList = () => {
     });
   }, []);
 
-  // console.log(allCategories.length)
   function nameCategory() {
     let categoryName
     if (allCategories.length > 0) {
@@ -38,7 +36,6 @@ const ProductList = () => {
     }
     return categoryName
   }
-console.log(nameCategory())
 
   const initialValues = {
     image: "rangerTab.png",
@@ -85,11 +82,10 @@ console.log(nameCategory())
         } else {
           const productToAdd = response.data;
           setProducts([...products, data]);
-          window.location.replace(`/category/${!id ? data.category_id : id}`)
+          window.location.replace(`/category/${!id ? data.category_id.split(',')[0] : id}`)
           resetForm();
         }
       });
-console.log(data)
   };
 
   // Post image
@@ -162,7 +158,6 @@ console.log(data)
         );
     }
     window.location.replace(`/category/${id}`)
-
   }
   return (
     <div className="container">
@@ -260,10 +255,9 @@ console.log(data)
             </Card>
           );
         })}
-
       </div>
-
-      <div className="border border-primary p-3 mb-3">
+ 
+      {singleCategory.username === authState.username && <div className="border border-primary p-3 mb-3">
         <h3 className="display-6 mb-3">Add A Product</h3>
         <Formik onSubmit={onSubmit} initialValues={initialValues} validationSchema={validationSchema}>
           <Form className="container">
@@ -326,7 +320,7 @@ console.log(data)
 
           </Form>
         </Formik>
-      </div>
+      </div>}
 
     </div>
   );

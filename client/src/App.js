@@ -64,6 +64,41 @@ function App() {
     window.location.replace("/")
   };
 
+  // let timer;
+
+  // const runTimer = () => {
+  //   timer = setTimeout(() => {
+  //     console.log('meow')
+  //     logout()
+  //   }, 900000)
+  // }
+  // runTimer();
+
+  // window.addEventListener('click', (e) => {
+  //   clearTimeout(timer)
+  //   runTimer()
+  // })
+
+  // window.addEventListener('mousemove', (e) => {
+  //   clearTimeout(timer)
+  //   runTimer()
+  // })
+
+  // window.addEventListener('scroll', (e) => {
+  //   clearTimeout(timer)
+  //   runTimer()
+  // })
+
+  // window.addEventListener('keydown', (e) => {
+  //   clearTimeout(timer)
+  //   runTimer()
+  // })
+
+  // window.addEventListener('keyup', (e) => {
+  //   clearTimeout(timer)
+  //   runTimer()
+  // })
+
   return (
     <div className="App ">
       <AuthContext.Provider value={{ authState, setAuthState }}>
@@ -120,12 +155,14 @@ export default App;
 //update price glitch (DONE)
 //update single product items (DONE)
 //add product to navbar and as a separate page (DONE)
+//addproduct bug (DONE)
+//auto logout (DONE)
 
-//addproduct bug
-//auto logout
+// organize shop
+//update button to category name, add username to category
 // personalize shop name (add field to model)
-// Add shopping cart to profile link, and as a new page, add products "user has many products".
 // view anyone's shop.
+// Add shopping cart to profile link, and as a new page, add products "user has many products".
 //select products from anyone's shop.
 // subtract from stock
 //add friends

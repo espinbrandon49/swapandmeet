@@ -69,7 +69,7 @@ const Category = () => {
         }
       </div>
 
-      <ProductList />
+      <ProductList singleCategory={singleCategory}/>
 
     </div>
   );
