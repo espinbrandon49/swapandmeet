@@ -33,7 +33,6 @@ const Profile = () => {
     });
 
     axios.get(`http://localhost:3001/api/products/productbyuserId/${id}`).then((response) => {
-      // console.log(response.data)
       setUserProducts(response.data);
     });
 
@@ -42,7 +41,7 @@ const Profile = () => {
     });
   }, []);
 
-  const editProduct = (field, defaultValue, pid) => {
+  const editProducts = (field, defaultValue, pid) => {
     if (field === "product_name") {
       let newProductName = prompt('Enter new product name', defaultValue);
       axios
@@ -83,11 +82,11 @@ const Profile = () => {
     }
     window.location.replace(`/category/${id}`)
   }
-  
+
   return (
     <div className="container text-center">
       <div className="mb-3">
-        <h1 className="lobster">{authState.username === username ? "Your Shop" : username  }</h1>
+        <h1 className="lobster">{authState.username === username ? "Your Shop" : username}</h1>
         <img src={`http://localhost:3001/public/image-${image}`} style={styles.width} alt=" " />
       </div>
 
@@ -102,12 +101,9 @@ const Profile = () => {
                 navigate(`/category/${value.id}`);
               }}
             >
-
               <ListGroup.Item action variant="primary">
                 {value.category_name}
               </ListGroup.Item>
-
-
             </ListGroup>
           );
         })}
@@ -116,21 +112,21 @@ const Profile = () => {
       <div >
         <h4 className="openSans">Products</h4>
         <div className="d-flex justify-content-center flex-wrap">
-        {userProducts.map((value, key) => {
-          return (
-            <Card
-              style={{ width: '9rem' }}
-              key={value.id}
-              className=""
-              onClick={() => {
-                navigate(`/category/${value.category_id}`);
-              }}
-            >
-              <Card.Img className="p-3" variant="top" src={`http://localhost:3001/public/image-${value.image}`} />
-              <Card.Body className="openSans bg-warning fs-6 fw-bold" >{value.product_name}</Card.Body>
-            </Card>
-          );
-        })}
+          {userProducts.map((value, key) => {
+            return (
+              <Card
+                style={{ width: '9rem' }}
+                key={value.id}
+                className=""
+                onClick={() => {
+                  navigate(`/category/${value.category_id}`);
+                }}
+              >
+                <Card.Img className="p-3" variant="top" src={`http://localhost:3001/public/image-${value.image}`} />
+                <Card.Body className="openSans bg-warning fs-6 fw-bold" >{value.product_name}</Card.Body>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </div>

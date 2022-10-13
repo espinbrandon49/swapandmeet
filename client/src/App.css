@@ -26,6 +26,10 @@
   color: #3B71CA;
 }
 
+.purpleDotBorder {
+  border: 2px dotted #162D5D;
+}
+
 .navbar-toggler {
   background-color: var(--bs-light-color) !important;
 }

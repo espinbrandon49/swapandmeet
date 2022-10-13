@@ -105,7 +105,7 @@ function App() {
         <Router>
           <Navbar style={styles.navbar} expand="md" className="">
             <Container>
-              <Navbar.Brand href="/" className="text-light lobster fs-1" >React-EZ-Commerce</Navbar.Brand>
+              <Navbar.Brand href="/" className="text-light lobster fs-1" >EZ Swap Meet</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">

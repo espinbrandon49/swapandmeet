@@ -9,7 +9,7 @@ import AddTag from './AddTag';
 
 const Home = () => {
   const [categories, setCategories] = useState([])
-  
+
   // const [products, setProducts] = useState([])
   const { authState } = useContext(AuthContext);
 
@@ -27,15 +27,14 @@ const Home = () => {
   }, [])
 
   return (
-    <div className='container'>
+    <div className='container '>
+      <div className='yellowDotBorder my-5 p-3 d-flex align-items-center flex-wrap'>
+        <h1 className='openSans' onClick={() => navigate(`/profile/${authState.id}`)}>Welcome, {authState.username}</h1>
 
-      <div className='yellowDotBorder my-3 p-3 d-flex align-items-center'>
-      <h1 className='openSans' onClick={() => navigate(`/profile/${authState.id}`) }>Welcome, {authState.username}</h1>
-
-      <p className='lobster fs-5 text-muted'>A gathering at which enthusiasts or collectors trade or exchange items of common interest</p>
+        <p className='lobster fs-5 text-muted'>A gathering at which enthusiasts or collectors trade or exchange items of common interest</p>
       </div>
-      
-      <div className='w-75 mx-auto'>
+
+      <div className='w-75 mb-5 mx-auto'>
         <ListGroup className='container text-center'>
           <ListGroup.Item variant="primary" ><h6 className='fw-bold openSans' >VIEW BY CATEGORY</h6></ListGroup.Item>
           {categories.map((value, key) => {
@@ -45,21 +44,23 @@ const Home = () => {
                 className="category lobster"
                 onClick={() => { navigate(`/category/${value.id}`) }}
               >
-                <span className="fs-3" > {value.category_name} </span><span className="openSans ">added by {authState.username === value.username? "You" : value.username}</span>
+                <span className="fs-3" > {value.category_name} </span><span className="openSans ">added by {authState.username === value.username ? "You" : value.username}</span>
               </ListGroup.Item>
             )
           })}
         </ListGroup>
       </div>
 
-      <div className='m-4 bg-light rounded-top ' >
-        <h5 className="openSans bg-secondary p-3 text-light rounded-top">Add A Category</h5>
-        <AddCategory />
+      <div className='purpleDotBorder'>
+        <div className='m-4 bg-light rounded-top pb-3 mb-3 border-5 border-warning border-bottom ' >
+          <h5 className="openSans bg-secondary p-3 text-light rounded-top">Add A Category</h5>
+          <AddCategory />
+        </div>
 
-      </div>
-      <div className='m-4 bg-light rounded-top'>
-        <h5 className="openSans bg-secondary text-light p-3 rounded-top">Add A Tag</h5>
-        <AddTag />
+        <div className='m-4 bg-light rounded-top pb-3 mb-3 border-5 border-warning border-bottom'>
+          <h5 className="openSans bg-secondary text-light p-3 rounded-top">Add A Tag</h5>
+          <AddTag />
+        </div>
       </div>
     </div>
   )

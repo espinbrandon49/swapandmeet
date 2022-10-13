@@ -30,7 +30,6 @@ const AddCategory = () => {
     }).then((response) => {
       resetForm()
       window.location.replace('http://localhost:3000/')
-      // navigate('/')
     });
   };
 
@@ -47,7 +46,7 @@ const AddCategory = () => {
           <label>Category</label>
           <ErrorMessage name="category_name" component='div' />
         </div>
-        <button type='submit' className="btn btn-outline-primary my-3" >Add Category</button>
+        <button type='submit' className="btn btn-outline-secondary my-3" >Add Category</button>
 
       </Form>
     </Formik>
