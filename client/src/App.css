@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans&display=swap');
+
+:root {
+  --bs-light-color: #FBFBFB;
+}
+
+.App {
+/* max-width: 768px;
+  margin: 0, auto; */
+}
+
+.lobster {
+  font-family: 'Lobster', cursive;
+}
+
+.openSans {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.yellowDotBorder {
+  border: 2px dotted #E4A11B;
+}
+
+.yellowDotBorder:hover {
+  cursor: pointer;
+  color: #3B71CA;
+}
+
+.navbar-toggler {
+  background-color: var(--bs-light-color) !important;
+}
+
+.link, #dropdown {
+  text-decoration: none;
+  color: var(--bs-light-color);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.link:hover {
+  color: hsla(0, 0%, 100%, 0.75);
+}
+
+.dropdown-menu {
+  border: 1px dotted #E4A11B !important;
+
+}
+
+.dropdown-item:hover {
+  color: #1e2125;
+  background-color: #e9ecef;
+}
+
+.dropdown-item:active {
+  color: #fff;
+  background-color: #096efd;
+}
