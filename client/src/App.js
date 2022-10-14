@@ -159,26 +159,27 @@ export default App;
 //auto logout (DONE)
 // view anyone's shop. (DONE)
 //update button to category name, add username to category (DONE)
+//add swap meet description on homepage/registration (DONE)
 
 // organize shop
+//footer
 // update shop name
 //conditionally render categories on addProducts, ideally, you can't add to anyone's category
 // Add shopping cart to profile link, and as a new page, add products "user has many products".
 //select products from anyone's shop.
 // subtract from stock
-//add friends
-//add swap meet description on homepage/registration
-// add instructions on registration/registration
+
+// ______________________MVP
+//add friends list
 
 // add checkout
-
+//make searchable
 // update products on single form. 
 // update product images
 // update shop name
 // update username
 // update password 
 // update avatar
-
 
 //bugs
   //Categories do not populate immediately, need to reload

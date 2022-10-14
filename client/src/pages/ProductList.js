@@ -306,7 +306,7 @@ const ProductList = ({singleCategory}) => {
               {tags.map((tag, key) => {
                 return (
                   <div className="form-check form-check-inline">
-                    <Field className="form-check-input" type="checkbox" name="tagIds" value={tag.id.toString()} />
+                    <Field className="form-check-input" type="checkbox" name="tagIds" value={tag.id.toString()} key={tag.id} />
                     <label className="form-check-label" key={key}>{tag.tag_name}</label>
                   </div>
                 );

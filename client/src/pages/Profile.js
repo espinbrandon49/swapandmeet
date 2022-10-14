@@ -8,7 +8,8 @@ import { AuthContext } from "../helpers/AuthContext";
 const styles = {
   width: {
     width: "200px",
-    height: "200px"
+    height: "200px",
+
   },
 };
 
@@ -84,50 +85,65 @@ const Profile = () => {
   }
 
   return (
-    <div className="container text-center">
-      <div className="mb-3">
+    <div className="container text-center ">
+
+      <div className="my-3 border-5 border-warning border-bottom pb-1 mx-auto w-75">
         <h1 className="lobster">{authState.username === username ? "Your Shop" : username}</h1>
-        <img src={`http://localhost:3001/public/image-${image}`} style={styles.width} alt=" " />
+        <img className="yellowDotBorder m-3 p-2" src={`http://localhost:3001/public/image-${image}`} style={styles.width} alt=" " />
       </div>
 
       <div className="mb-3" >
-        <h4 className="openSans">Categories</h4>
+        <h4 className="openSans mb-3 fs-2 ">Categories</h4>
         {userCategories.map((value, key) => {
           return (
-            <ListGroup action variant="primary"
-              key={value.id}
-              className=""
-              onClick={() => {
-                navigate(`/category/${value.id}`);
-              }}
-            >
-              <ListGroup.Item action variant="primary">
-                {value.category_name}
-              </ListGroup.Item>
-            </ListGroup>
+            <>
+              <div
+               className="purpleDotBorder mx-5 mb-5"
+               style={{backgroundColor: "#fff3cd"}}
+               >
+                <ListGroup action variant="primary"
+                  key={value.id}
+                  className="lobster fs-3 w-50 mx-auto my-3"
+                  onClick={() => {
+                    navigate(`/category/${value.id}`);
+                  }}
+                >
+                  <ListGroup.Item action variant="primary">
+                    {value.category_name}
+                  </ListGroup.Item>
+                </ListGroup>
+                <div className="d-flex justify-content-center m-3 flex-wrap">
+                  {userProducts
+                    .filter((category, i) => category.categoryName === value.category_name)
+                    .map((product, i) => (
+                      <Card
+                        style={{ width: '10rem' }}
+                        key={product.id + 199}
+                        className="m-3 openSans"
+                      >
+                        <Card.Img
+                          className="p-1"
+                          variant="top"
+                          src={`http://localhost:3001/public/image-${product.image}`} />
+                        <Card.Title>{product.product_name}</Card.Title>
+                        <ListGroup className="list-group-flush" >
+                          <ListGroup.Item>Price: {product.price} </ListGroup.Item>
+                          <ListGroup.Item>Stock: {product.stock} </ListGroup.Item>
+                          <ListGroup.Item className="" ><button type="button" className="btn btn-secondary"                       onClick={() => {
+                          navigate(`/category/${product.category_id}`);
+                        }}>Update</button></ListGroup.Item>
+                        </ListGroup>
+                      </Card>
+                    )
+
+                    )
+                  }
+                </div>
+              </div>
+              {/* <div className="border-5 border-warning border-bottom pb-1 mx-auto w-50" ></div> */}
+            </>
           );
         })}
-      </div>
-
-      <div >
-        <h4 className="openSans">Products</h4>
-        <div className="d-flex justify-content-center flex-wrap">
-          {userProducts.map((value, key) => {
-            return (
-              <Card
-                style={{ width: '9rem' }}
-                key={value.id}
-                className=""
-                onClick={() => {
-                  navigate(`/category/${value.category_id}`);
-                }}
-              >
-                <Card.Img className="p-3" variant="top" src={`http://localhost:3001/public/image-${value.image}`} />
-                <Card.Body className="openSans bg-warning fs-6 fw-bold" >{value.product_name}</Card.Body>
-              </Card>
-            );
-          })}
-        </div>
       </div>
     </div>
   );
