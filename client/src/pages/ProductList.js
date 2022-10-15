@@ -34,10 +34,11 @@ const ProductList = ({ singleCategory }) => {
     });
   }, []);
 
-if (shoppingCart.length > 0 && shoppingCart[0].user_id === authState.id) {
+if ( shoppingCart.user_id === authState.id) {
   console.log(shoppingCart)
 };
-// console.log(shoppingCart[0]) if shopping cart does not display try this
+// console.log(shoppingCart) if shopping cart does not display try this
+// console.log(Object.keys(shoppingCart).length)
 
   function nameCategory() {
     let categoryName

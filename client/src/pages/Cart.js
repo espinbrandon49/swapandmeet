@@ -13,9 +13,9 @@ const Cart = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:3001/api/cart/${id}`).then((response) => {
-      if (response.data.length > 0) {
+      if (response.data.id > 0) {
         setCart(true)
-        setShoppingCart(response.data)
+        setShoppingCart(response.data)        
       }
     });
 
@@ -38,6 +38,7 @@ const Cart = () => {
         console.log(response.data)
         setCart(true)
       });
+      window.location.reload()
   }
 
   return (
@@ -45,16 +46,16 @@ const Cart = () => {
       <>
         <h2>Hello, {username}</h2>
         
-        {!shoppingCart && <button onClick={createCart}>Create Cart</button>}
+        {!cart && <button onClick={createCart}>Create Cart</button>}
 
         {shoppingCart && (
-          shoppingCart[0]?.products.length === 0 && (
+          shoppingCart.products?.length === 0 && (
             <div>Shopping Cart Empty</div>
           )
         )}
 
-        {shoppingCart && (
-          shoppingCart[0]?.products.length > 0 && (
+        {cart && (
+          shoppingCart.products?.length > 0 && (
             <div>Shopping Cart Has A Product</div>
           )
         )}

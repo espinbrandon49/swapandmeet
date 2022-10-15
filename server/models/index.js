@@ -60,6 +60,11 @@ Product.belongsToMany(Cart, {
   foreignKey: 'product_id',
 })
 
+Cart.belongsToMany(Product, {
+  through: ProductCart,
+  foreignKey: 'cart_id',
+})
+
 module.exports = {
   Product,
   Category,
