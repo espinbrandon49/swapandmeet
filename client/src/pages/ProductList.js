@@ -7,13 +7,14 @@ import { AuthContext } from "../helpers/AuthContext";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const ProductList = ({singleCategory}) => {
+const ProductList = ({ singleCategory }) => {
   let { id } = useParams();
   const [products, setProducts] = useState([]);
   const [tags, setTags] = useState([]);
   const [image, setImage] = useState({})
   const { authState } = useContext(AuthContext);
   const [allCategories, setAllCategories] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState({})
 
   useEffect(() => {
     axios.get("http://localhost:3001/api/categories").then((response) => {
@@ -27,7 +28,16 @@ const ProductList = ({singleCategory}) => {
     axios.get(`http://localhost:3001/api/tags`).then((response) => {
       setTags(response.data);
     });
+
+    axios.get(`http://localhost:3001/api/cart/${id}`).then((response) => {
+      setShoppingCart(response.data)
+    });
   }, []);
+
+if (shoppingCart.length > 0 && shoppingCart[0].user_id === authState.id) {
+  console.log(shoppingCart)
+};
+// console.log(shoppingCart[0]) if shopping cart does not display try this
 
   function nameCategory() {
     let categoryName
@@ -159,6 +169,24 @@ const ProductList = ({singleCategory}) => {
     }
     window.location.replace(`/category/${id}`)
   }
+
+  const addToCart = () => {
+    axios
+      .put("http://localhost:3001/api/auth/changeusername", {
+      },
+        {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        }
+      )
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          console.log(response.data)
+        }
+      });
+    // setAuthState({ ...authState, username: newUsername })
+  }
   return (
     <div className="container">
       <div className="d-flex flex-wrap justify-content-center">
@@ -242,21 +270,31 @@ const ProductList = ({singleCategory}) => {
 
               </ListGroup>
 
-              {authState.username === value.username && <Card.Body>
-                <button
-                  variant="danger"
-                  onClick={() => deleteProduct(value.id)}
-                  className="btn btn-outline-danger w-100"
-                >
-                  Remove
-                </button>
-              </Card.Body>
+              {authState.username === value.username
+                ? <Card.Body>
+                  <button
+                    variant="danger"
+                    onClick={() => deleteProduct(value.id)}
+                    className="btn btn-outline-danger w-100"
+                  >
+                    Remove
+                  </button>
+                </Card.Body>
+                : <Card.Body>
+                  <button
+                    variant="danger"
+                    onClick={() => deleteProduct(value.id)}
+                    className="btn btn-outline-secondary w-100"
+                  >
+                    Add To Cart
+                  </button>
+                </Card.Body>
               }
             </Card>
           );
         })}
       </div>
- 
+
       {singleCategory.username === authState.username && <div className="border border-primary p-3 mb-3">
         <h3 className="display-6 mb-3">Add A Product</h3>
         <Formik onSubmit={onSubmit} initialValues={initialValues} validationSchema={validationSchema}>

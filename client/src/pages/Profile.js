@@ -21,7 +21,7 @@ const Profile = () => {
   const [allCategories, setAllCategories] = useState([]);
   const navigate = useNavigate();
   const { authState, setAuthState } = useContext(AuthContext);
- 
+
   useEffect(() => {
     axios.get(`http://localhost:3001/api/auth/basicinfo/${id}`).then((response) => {
       setUsername(response.data.username);
@@ -41,53 +41,13 @@ const Profile = () => {
     });
   }, []);
 
-  const editProducts = (field, defaultValue, pid) => {
-    if (field === "product_name") {
-      let newProductName = prompt('Enter new product name', defaultValue);
-      axios
-        .put("http://localhost:3001/api/products/productName", {
-          newProductName: newProductName,
-          id: pid
-        },
-          {
-            headers: { accessToken: localStorage.getItem("accessToken") },
-          }
-        );
-      setUserProducts([...userProducts])
-    } else if (field === "price") {
-      let newProductPrice = prompt('Enter new price', defaultValue);
-      axios
-        .put("http://localhost:3001/api/products/productPrice", {
-          newProductPrice: newProductPrice,
-          id: pid
-        },
-          {
-            headers: { accessToken: localStorage.getItem("accessToken") },
-          }
-        )
-        .then(() => {
-          setUserProducts([...userProducts,]);
-        });
-    } else {
-      let newStock = prompt('Enter new stock count', defaultValue);
-      axios
-        .put("http://localhost:3001/api/products/stock", {
-          newStock: newStock,
-          id: pid
-        },
-          {
-            headers: { accessToken: localStorage.getItem("accessToken") },
-          }
-        );
-    }
-    window.location.replace(`/category/${id}`)
-  }
-  console.log(userCategories)
+
+  // console.log(userCategories)
   // console.log(userProducts)
   // console.log(userProducts.map((value, i) => value.id))
   // console.log(userCategories.map((value, i) => value.id))
   // console.log(authState.username)
- 
+
   const editUsername = (defaultValue) => {
     let newUsername = prompt('Enter new shop name', defaultValue);
     let uid = authState.id;
@@ -107,7 +67,7 @@ const Profile = () => {
       .then((response) => {
         if (response.data.error) {
           alert(response.data.error);
-        } else{
+        } else {
           console.log(response.data.token)
           localStorage.setItem("accessToken", response.data.token)
           setAuthState({
@@ -169,10 +129,13 @@ const Profile = () => {
                         <ListGroup className="list-group-flush" key={value.id + 500}>
                           <ListGroup.Item key={value.id + 600}>Price: {product.price} </ListGroup.Item>
                           <ListGroup.Item>Stock: {product.stock} </ListGroup.Item>
-                          <ListGroup.Item className="" ><button type="button" className="btn btn-secondary" onClick={() => {
-                            navigate(`/category/${product.category_id}`);
-                          }}>Update</button></ListGroup.Item>
                         </ListGroup>
+                        <Card.Body className="" >
+                          <button type="button" className="btn btn-secondary w-100" onClick={() => {
+                            navigate(`/category/${product.category_id}`);
+                          }}>Update</button>
+                        </Card.Body>
+
                       </Card>
                     )
 
@@ -180,7 +143,6 @@ const Profile = () => {
                   }
                 </div>
               </div>
-              {/* <div className="border-5 border-warning border-bottom pb-1 mx-auto w-50" ></div> */}
             </>
           );
         })}

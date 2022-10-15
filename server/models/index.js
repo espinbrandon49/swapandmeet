@@ -5,6 +5,7 @@ const Tag = require('./Tag');
 const ProductTag = require('./ProductTag');
 const Users = require('./Users');
 const Cart = require('./Cart');
+const ProductCart = require('./ProductCart')
 const { hasOne } = require('./Cart');
 
 // Products belongsTo Category
@@ -48,9 +49,15 @@ Cart.belongsTo(Users, {
   foreignKey: 'user_id',
 });
 
-// Cart have many Products
-Cart.hasMany(Product, {
-  onDelete: 'cascade'
+// // Cart have many Products
+// Cart.hasMany(Product, {
+//   onDelete: 'cascade'
+// })
+
+// Product belongToMany Cart (through CartTag)
+Product.belongsToMany(Cart, {
+  through: ProductCart,
+  foreignKey: 'product_id',
 })
 
 module.exports = {

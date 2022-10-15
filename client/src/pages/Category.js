@@ -51,7 +51,7 @@ const Category = () => {
       <div className="m-3">
         <div className="d-flex">
           <h1
-            className="lobster w-25 pb-1 mb-3 border-5 border-warning border-bottom "
+            className="lobster w-50 pb-1 mb-3 border-5 border-warning border-bottom "
           >
             {singleCategory.category_name}
           </h1>
