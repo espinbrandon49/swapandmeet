@@ -45,7 +45,6 @@ const Registration = () => {
 
   const sendImage = (event) => {
     // event.preventDefault()
-    console.log(image)
     let formData = new FormData()
     formData.append('image', image)
     axios

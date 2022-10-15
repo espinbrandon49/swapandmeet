@@ -62,12 +62,10 @@ router.post('/', validateToken, async (req, res) => {
     category.userId = req.user.id
     await Category.create(category)
     // res.status(200).json(category)
-    
-    const tagName ={
-      // id: 50,
+
+    const tagName = {
       tag_name: req.body.category_name,
-      // products: []
-    } 
+    }
     await Tag.create(tagName)
     res.status(200).json(category)
   } catch (err) {
@@ -78,11 +76,15 @@ router.post('/', validateToken, async (req, res) => {
 // update a category by its `id` value
 router.put('/categoryName', validateToken, async (req, res) => {
   try {
-    const { newCategoryName, id } = req.body;
+    const { newCategoryName, id, pid } = req.body;
     await Category.update(
       { category_name: newCategoryName },
       { where: { id: id } }
     );
+    await Product.update(
+      { categoryName: newCategoryName },
+      { where: { id: pid } }
+    )
     res.status(200).json(newCategoryName)
   } catch (err) {
     res.status(400).json(err)

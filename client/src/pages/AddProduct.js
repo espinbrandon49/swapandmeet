@@ -93,7 +93,7 @@ const AddProduct = () => {
         console.log(response)
       })
   }
-
+console.log(allCategories.filter((myCategories, id) => myCategories.username === authState.username))
   return (
     <div className="border border-primary p-3 mb-3">
       <div className="border border-primary p-3 mb-3">
@@ -133,7 +133,10 @@ const AddProduct = () => {
                   name="category_id"
                 >
                   <option>Select A Category</option>
-                  {allCategories.map((value, i) => {
+                  {
+                  allCategories
+                  .filter((myCategories, id) => myCategories.username === authState.username)
+                  .map((value, i) => {
                     return <option key={i} value={[value.id, value.category_name]} label={value.category_name}>value.category_name</option>
                   })
                   }

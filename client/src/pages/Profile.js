@@ -9,7 +9,6 @@ const styles = {
   width: {
     width: "200px",
     height: "200px",
-
   },
 };
 
@@ -21,8 +20,8 @@ const Profile = () => {
   const [userProducts, setUserProducts] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const navigate = useNavigate();
-  const { authState } = useContext(AuthContext)
-
+  const { authState, setAuthState } = useContext(AuthContext);
+ 
   useEffect(() => {
     axios.get(`http://localhost:3001/api/auth/basicinfo/${id}`).then((response) => {
       setUsername(response.data.username);
@@ -83,12 +82,52 @@ const Profile = () => {
     }
     window.location.replace(`/category/${id}`)
   }
+  console.log(userCategories)
+  // console.log(userProducts)
+  // console.log(userProducts.map((value, i) => value.id))
+  // console.log(userCategories.map((value, i) => value.id))
+  // console.log(authState.username)
+ 
+  const editUsername = (defaultValue) => {
+    let newUsername = prompt('Enter new shop name', defaultValue);
+    let uid = authState.id;
+    let pid = userProducts.map((value, i) => value.id);
+    let cid = userCategories.map((value, i) => value.id);
+    axios
+      .put("http://localhost:3001/api/auth/changeusername", {
+        newUsername: newUsername,
+        uid: uid,
+        pid: pid,
+        cid: cid
+      },
+        {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        }
+      )
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else{
+          console.log(response.data.token)
+          localStorage.setItem("accessToken", response.data.token)
+          setAuthState({
+            username: newUsername,
+            id: uid,
+            status: true
+          });
+        }
+      });
+    // setAuthState({ ...authState, username: newUsername })
+  }
 
   return (
     <div className="container text-center ">
 
       <div className="my-3 border-5 border-warning border-bottom pb-1 mx-auto w-75">
         <h1 className="lobster">{authState.username === username ? "Your Shop" : username}</h1>
+
+        <button onClick={() => editUsername(authState.username)}  > update name</button>
+
         <img className="yellowDotBorder m-3 p-2" src={`http://localhost:3001/public/image-${image}`} style={styles.width} alt=" " />
       </div>
 
@@ -98,9 +137,10 @@ const Profile = () => {
           return (
             <>
               <div
-               className="purpleDotBorder mx-5 mb-5"
-               style={{backgroundColor: "#fff3cd"}}
-               >
+                className="purpleDotBorder mx-5 mb-5"
+                style={{ backgroundColor: "#fff3cd" }}
+                key={value.id + 100}
+              >
                 <ListGroup action variant="primary"
                   key={value.id}
                   className="lobster fs-3 w-50 mx-auto my-3"
@@ -108,17 +148,17 @@ const Profile = () => {
                     navigate(`/category/${value.id}`);
                   }}
                 >
-                  <ListGroup.Item action variant="primary">
+                  <ListGroup.Item action variant="primary" key={value.id + 200}>
                     {value.category_name}
                   </ListGroup.Item>
                 </ListGroup>
-                <div className="d-flex justify-content-center m-3 flex-wrap">
+                <div key={value.id + 300} className="d-flex justify-content-center m-3 flex-wrap">
                   {userProducts
                     .filter((category, i) => category.categoryName === value.category_name)
                     .map((product, i) => (
                       <Card
                         style={{ width: '10rem' }}
-                        key={product.id + 199}
+                        key={product.id + 400}
                         className="m-3 openSans"
                       >
                         <Card.Img
@@ -126,12 +166,12 @@ const Profile = () => {
                           variant="top"
                           src={`http://localhost:3001/public/image-${product.image}`} />
                         <Card.Title>{product.product_name}</Card.Title>
-                        <ListGroup className="list-group-flush" >
-                          <ListGroup.Item>Price: {product.price} </ListGroup.Item>
+                        <ListGroup className="list-group-flush" key={value.id + 500}>
+                          <ListGroup.Item key={value.id + 600}>Price: {product.price} </ListGroup.Item>
                           <ListGroup.Item>Stock: {product.stock} </ListGroup.Item>
-                          <ListGroup.Item className="" ><button type="button" className="btn btn-secondary"                       onClick={() => {
-                          navigate(`/category/${product.category_id}`);
-                        }}>Update</button></ListGroup.Item>
+                          <ListGroup.Item className="" ><button type="button" className="btn btn-secondary" onClick={() => {
+                            navigate(`/category/${product.category_id}`);
+                          }}>Update</button></ListGroup.Item>
                         </ListGroup>
                       </Card>
                     )

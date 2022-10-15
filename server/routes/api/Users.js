@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Users } = require("../../models");
+const { Users, Product, Category } = require("../../models");
 const bcrypt = require('bcrypt');
 const { validateToken } = require("../../middleWares/AuthMiddlewares")
 const { sign } = require('jsonwebtoken')
@@ -47,6 +47,27 @@ router.get('/basicinfo/:id', async (req, res) => {
     attributes: { exclude: ['password'] },
   })
   res.json(basicInfo)
-}) 
+})
+
+// update a username(shopname) by its `id` value
+router.put("/changeusername", validateToken, async (req, res) => {
+  const { newUsername, uid, pid, cid } = req.body;
+  try {
+    await Users.update(
+      { username: newUsername },
+      { where: { id: uid } }
+    );
+    await Product.update(
+      { username: newUsername },
+      { where: { id: pid } }
+    );
+    await Category.update(
+      { username: newUsername },
+      { where: { id: cid } }
+    );
+  } catch (err) {
+    res.status(400).json(err)
+  }
+});
 
 module.exports = router;

@@ -29,13 +29,15 @@ const Category = () => {
         })
     }
   }
-
+// console.log(singleCategory.products.map((value, i) => value.id))
   const editCategoryName = (defaultValue) => {
     let newCategoryName = prompt('Enter new category name', defaultValue);
+    let pid = singleCategory.products.map((value, i) => value.id)
     axios
       .put("http://localhost:3001/api/categories/categoryName", {
         newCategoryName: newCategoryName,
-        id: id
+        id: id,
+        pid: pid
       },
         {
           headers: { accessToken: localStorage.getItem("accessToken") },
