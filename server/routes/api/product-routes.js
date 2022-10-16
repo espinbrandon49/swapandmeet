@@ -207,13 +207,20 @@ router.put('/productPrice', validateToken, async (req, res) => {
   }
 })
 
+router.put('/productcart', validateToken, async (req, res) => {
+  
+  try {
+    const { cart_id, id } = req.body;
+    await ProductCart.update(
+      { cart_id: cart_id },
+      { where: { id: id } }
+    );
+    res.status(200).json(newProductName)
+  } catch (err) {
+    res.status(400).json(err)
+  }
+})
 module.exports = router;
-
-//image post route
-// app.post('/profile', upload.single('avatar'), function (req, res, next) {
-//   // req.file is the `avatar` file
-//   // req.body will hold the text fields, if there were any
-// })
 
 // update product
 // router.put('/:id', validateToken, (req, res) => {

@@ -25,7 +25,11 @@ const AddCategory = () => {
   })
 
   const onSubmit = (data, {resetForm}) => {
-    axios.post('http://localhost:3001/api/categories', {category_name: data.category_name, username: authState.username}, {
+    axios.post('http://localhost:3001/api/categories', 
+    {
+      category_name: data.category_name, 
+      username: authState.username}, 
+    {
       headers: { accessToken: localStorage.getItem("accessToken") },
     }).then((response) => {
       resetForm()

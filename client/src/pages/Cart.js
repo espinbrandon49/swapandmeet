@@ -22,7 +22,6 @@ const Cart = () => {
     axios.get(`http://localhost:3001/api/auth/basicinfo/${id}`).then((response) => {
       setUsername(response.data.username);
     });
-
   }, [setCart]);
 
   console.log(username)

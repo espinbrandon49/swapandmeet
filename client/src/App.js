@@ -185,18 +185,19 @@ export default App;
 // organize shop (DONE)
 //footer (DONE)
 //conditionally render categories on addProducts, ideally, you can't add to anyone's category (DONE)
-// Add shopping cart to profile link, and as a new page, add products "user has many products". (DONE)
+// Add shopping cart to profile link, and as a new page (DONE)
 
-//select products from anyone's shop.
+// add products "user has many products".
+// select products from anyone's shop.
 // subtract from stock
-//add friends list
-//sticky footer
-// update shop name Trinh?
+// sticky footer
+// update shop name 
 // register bug: register does not automatically recognize new user
 // ______________________MVP
 
 // add checkout
-//make searchable
+// follow shops
+// make searchable
 // update products on single form. 
 // update product images
 // update shop name

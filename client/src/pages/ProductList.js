@@ -15,7 +15,9 @@ const ProductList = ({ singleCategory }) => {
   const { authState } = useContext(AuthContext);
   const [allCategories, setAllCategories] = useState([]);
   const [shoppingCart, setShoppingCart] = useState({})
-
+// console.log(tags)
+// console.log(shoppingCart)
+console.log(products)
   useEffect(() => {
     axios.get("http://localhost:3001/api/categories").then((response) => {
       setAllCategories(response.data);
@@ -34,11 +36,11 @@ const ProductList = ({ singleCategory }) => {
     });
   }, []);
 
-if ( shoppingCart.user_id === authState.id) {
-  console.log(shoppingCart)
-};
-// console.log(shoppingCart) if shopping cart does not display try this
-// console.log(Object.keys(shoppingCart).length)
+  if (shoppingCart.user_id === authState.id) {
+    // console.log(shoppingCart)
+  };
+  // console.log(shoppingCart) if shopping cart does not display try this
+  // console.log(Object.keys(shoppingCart).length)
 
   function nameCategory() {
     let categoryName
@@ -171,23 +173,39 @@ if ( shoppingCart.user_id === authState.id) {
     window.location.replace(`/category/${id}`)
   }
 
-  const addToCart = () => {
+  //CART ROUTES
+  const addToCart = (pid) => {
     axios
-      .put("http://localhost:3001/api/auth/changeusername", {
-      },
+      .post('http://localhost:3001/api/cart/addtocart',
+        {
+          product_id: 2,
+          cart_id:1  
+        },
         {
           headers: { accessToken: localStorage.getItem("accessToken") },
-        }
-      )
+        })
       .then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-          console.log(response.data)
-        }
+        console.log(response.data)
+        // window.location.replace('http://localhost:3000/')
       });
-    // setAuthState({ ...authState, username: newUsername })
   }
+
+  //PRODUCT ROUTES
+  // const addToCart = (pid) => {
+  //   axios
+  //     .put('http://localhost:3001/api/products/productcart',
+  //       {
+  //         product_id: pid,
+  //         cart_id: authState.id  
+  //       },
+  //       {
+  //         headers: { accessToken: localStorage.getItem("accessToken") },
+  //       })
+  //     .then((response) => {
+  //       console.log(response.data)
+  //       // window.location.replace('http://localhost:3000/')
+  //     });
+  // }
   return (
     <div className="container">
       <div className="d-flex flex-wrap justify-content-center">
@@ -284,7 +302,7 @@ if ( shoppingCart.user_id === authState.id) {
                 : <Card.Body>
                   <button
                     variant="danger"
-                    onClick={() => deleteProduct(value.id)}
+                    onClick={() => addToCart(value.id)}
                     className="btn btn-outline-secondary w-100"
                   >
                     Add To Cart
