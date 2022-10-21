@@ -26,10 +26,6 @@ const Cart = () => {
     });
   }, [setCart]);
 
-  // console.log(username)
-  // console.log(cart)
-  console.log(shoppingCart)
-
   useEffect(() => {
     setTotal(shoppingCartTotal)
   }, [shoppingCart])
@@ -44,6 +40,10 @@ const Cart = () => {
     return total
   }
 
+  // console.log(username)
+  // console.log(cart)
+  console.log(shoppingCart)
+
   const createCart = () => {
     axios.post('http://localhost:3001/api/cart/createCart',
       {},
@@ -57,14 +57,14 @@ const Cart = () => {
   }
 
   const removeFromCart = (event) => {
-    console.log(event.target.value)
-    axios.delete("http://localhost:3001/api/products/removefromcart",
+    console.log(event.target.value.split(','))
+    axios.post("http://localhost:3001/api/products/removefromcart",
       {
-        pid: event.target.value[1],
-        cid: event.target.value[0]
+        pid: event.target.value.split(',')[1],
+        cid: event.target.value.split(',')[0]
       }
     )
-    // window.location.reload()
+    window.location.reload()
   }
 
   return (
@@ -86,7 +86,6 @@ const Cart = () => {
             <div className="d-flex flex-wrap justify-content-center">
               {shoppingCart.products.map((value, i) => {
                 return (
-                  <>
                     <Card
                       style={{ width: '10rem' }}
                       key={value.id + 4000}
@@ -112,8 +111,6 @@ const Cart = () => {
                         >Remove From Cart</button>
                       </Card.Body>
                     </Card>
-                    <div>{value.product_cart.id}</div>
-                  </>
                 )
               })}
             </div>

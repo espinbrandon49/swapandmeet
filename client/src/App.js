@@ -189,20 +189,17 @@ export default App;
 // add products "user has many products". (DONE)
 // select products from anyone's shop. (DONE)
 
-
-// register bug: register does not automatically recognize new user
 // remove products from cart
 // ______________________MVP
 
-// subtract from stock
-// sticky footer
-// update shop name 
 // add checkout
+// update shop name 
 // follow shops
-// make searchable
+// _____________________stretch 1
+
 // update products on single form
 // update product images
-// update shop name
-// update username
+// update shop name/username
 // update password 
 // update avatar
+//_____________________stretch 2

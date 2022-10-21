@@ -203,7 +203,7 @@ router.post('/addtocart', validateToken, (req, res) => {
       const product_id = product.id
       const cart_id = req.user.id
       ProductCart.create({ product_id: product_id, cart_id: cart_id })
-      // if no product tags, just respond
+      
       res.status(200).json(product);
     })
     .catch((err) => {
@@ -213,14 +213,10 @@ router.post('/addtocart', validateToken, (req, res) => {
 });
 
 //remove from cart
-router.delete('/removefromcart', validateToken, (req, res) => {
+router.post('/removefromcart', (req, res) => {
   Product.findByPk(req.body.pid)
     .then((product) => {
-
-      ProductCart.destroy({ where : {
-        id: req.params.cid
-      }  })
-      // if no product tags, just respond
+      ProductCart.destroy({ where : {id: req.body.cid} })
       res.status(200).json(product);
     })
     .catch((err) => {
