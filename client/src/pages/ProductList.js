@@ -174,26 +174,9 @@ console.log(products)
   }
 
   //CART ROUTES
-  const addToCart = (pid) => {
-    axios
-      .post('http://localhost:3001/api/cart/addtocart',
-        {
-          product_id: 2,
-          cart_id:1  
-        },
-        {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        })
-      .then((response) => {
-        console.log(response.data)
-        // window.location.replace('http://localhost:3000/')
-      });
-  }
-
-  //PRODUCT ROUTES
   // const addToCart = (pid) => {
   //   axios
-  //     .put('http://localhost:3001/api/products/productcart',
+  //     .post('http://localhost:3001/api/cart/addtocart',
   //       {
   //         product_id: pid,
   //         cart_id: authState.id  
@@ -206,19 +189,49 @@ console.log(products)
   //       // window.location.replace('http://localhost:3000/')
   //     });
   // }
+
+  //PRODUCT ROUTES
+  const addToCart = (pid) => {
+    const productToAdd = products.filter((val) => {
+      return val.id === pid;
+    })
+    axios
+      .post('http://localhost:3001/api/products/addtocart',
+        {
+          // image: productToAdd[0].image,
+          // product_name: productToAdd[0].product_name,
+          // username: productToAdd[0].username,
+          // price: productToAdd[0].price,
+          // stock: productToAdd[0].stock,
+          // categoryName: productToAdd[0].categoryName,
+          // category_id: productToAdd[0].category_id,
+          // userId: productToAdd[0].userId,
+          // tagIds: productToAdd[0].tagIds  
+          pid:pid
+        },
+        {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+      .then((response) => {
+        console.log(response.data)
+        // window.location.replace('http://localhost:3000/')
+      });
+  }
+
+
   return (
     <div className="container">
       <div className="d-flex flex-wrap justify-content-center">
         {products.map((value, key) => {
           return (
-            <Card key={key} style={{ width: '18rem' }} className="m-3" >
+            <Card key={key} style={{ width: '12rem' }} className="m-3 openSans border border-secondary " >
 
-              <Card.Img variant="top" src={`http://localhost:3001/public/image-${value.image}`} alt={`product that is a ${value.product}`} />
+              <Card.Img className="p-1" variant="top" src={`http://localhost:3001/public/image-${value.image}`} alt={`product that is a ${value.product}`} />
 
               <Card.Body
                 className="productName d-flex justify-content-between align-items-center"
               >
-                <Card.Title className="fs-2" >{value.product_name}</Card.Title>
+                <Card.Title className="fs-6 fw-bold yellowDotBorder p-2 w-100 text-center" >{value.product_name}</Card.Title>
                 {authState.username === value.username && <button
                   type="button"
                   className="btn btn-outline-secondary"
@@ -314,10 +327,10 @@ console.log(products)
         })}
       </div>
 
-      {singleCategory.username === authState.username && <div className="border border-primary p-3 mb-3">
-        <h3 className="display-6 mb-3">Add A Product</h3>
+      {singleCategory.username === authState.username && <div className="purpleDotBorder p-3 mb-3 bg-white">
+        <h3 className="openSans mb-3">Add A Product</h3>
         <Formik onSubmit={onSubmit} initialValues={initialValues} validationSchema={validationSchema}>
-          <Form className="container">
+          <Form className="container openSans">
 
             <div className="form-floating mb-3">
               <Field autoComplete="off"

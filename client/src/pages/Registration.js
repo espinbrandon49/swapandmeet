@@ -72,25 +72,30 @@ const Registration = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <Form className="container">
-        <div className="form-floating mb-3">
-          <Field className="form-control openSans" autoComplete="off" id="inputCreatePost" name="username" placeholder="(Ex. John123...)" />
-          <label className="lobster">Shop Name</label>
-          <ErrorMessage name="username" component="div" />
-        </div>
-        <div className="form-floating mb-3 openSans">
-          <Field className="form-control" autoComplete="off" id="inputCreatePost" name="password" type="password" placeholder="Your Password..." />
-          <label htmlFor="">Password</label>
-          <ErrorMessage name="password" component="span" />
-        </div>
+    <div className="container">
+      <div className="bg-white p-3 my-3 border rounded border-primary">
+      <h2 className="openSans mb-3">Registration</h2>
+      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+        <Form className="">
+          <div className="form-floating mb-3">
+            <Field className="form-control openSans" autoComplete="off" id="inputCreatePost" name="username" placeholder="(Ex. John123...)" />
+            <label className="lobster">Shop Name</label>
+            <ErrorMessage name="username" component="div" />
+          </div>
+          <div className="form-floating mb-3 openSans">
+            <Field className="form-control" autoComplete="off" id="inputCreatePost" name="password" type="password" placeholder="Your Password..." />
+            <label htmlFor="">Password</label>
+            <ErrorMessage name="password" component="span" />
+          </div>
 
-        <input id="file" name="file" type="file" onChange={fileOnChange} className="mb-3" />
-        <br />
+          <input id="file" name="file" type="file" onChange={fileOnChange} className="mb-3" />
+          <br />
 
-        <button type="submit" className="btn btn-outline-primary">Register</button>
-      </Form>
-    </Formik>
+          <button type="submit" className="btn btn-outline-primary">Register</button>
+        </Form>
+      </Formik>
+      </div>
+    </div>
   );
 };
 

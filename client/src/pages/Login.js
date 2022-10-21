@@ -31,14 +31,17 @@ const Login = () => {
 
   return (
     <div className="container">
+      <div className="bg-white border rounded border-primary p-3 my-3 openSans">
+      <h2 className="openSans mx-3">Log In</h2>
+
       <FloatingLabel
         controlId="floatingInput"
         label="Shop Name"
-        className="mb-3 lobster"
+        className="m-3 lobster"
       >
         <Form.Control
           type="text"
-          className="openSans"
+          className=""
           placeholder="John123..."
           onChange={(event) => {
             setUsername(event.target.value);
@@ -49,7 +52,7 @@ const Login = () => {
       <FloatingLabel
         controlId="floatingPassword"
         label="Password"
-        className="mb-3 openSans"
+        className="m-3"
       >
         <Form.Control
           type="password"
@@ -61,8 +64,9 @@ const Login = () => {
       </FloatingLabel>
       <button
         onClick={login}
-        className="btn btn-outline-primary"
+        className="btn btn-outline-primary mx-3"
       >Login</button>
+      </div>
     </div>
   );
 };

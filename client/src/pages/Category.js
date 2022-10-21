@@ -66,7 +66,7 @@ const Category = () => {
             </button>
           }
         </div>
-        <Link className="link" style={{ color: "black" }} to={`/profile/${singleCategory.userId}`} ><h2>at {singleCategory.username}</h2></Link>
+        <Link className="link isLink" style={{ color: "black" }} to={`/profile/${singleCategory.userId}`} ><h2>at {singleCategory.username}</h2></Link>
 
         {authState.username === singleCategory.username &&
           <div >

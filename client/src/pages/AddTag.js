@@ -33,7 +33,9 @@ const AddTag = () => {
   };
 
   return (
-    <div className='addCategoryPage'>
+    <div className='container openSans'>
+      <div className='bg-white my-3 p-3 border border-secondary rounded'>
+        <h2 className='mx-3 mb-3'>Add A Tag</h2>
       <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}  >
         <Form className='container'>
           <div className='form-floating mb-3'>
@@ -46,9 +48,10 @@ const AddTag = () => {
           <label>Tag Name</label>
           <ErrorMessage name="tag_name" component='div' />
           </div>
-          <button type='submit' className="btn btn-outline-secondary">Add Tag</button><span className="openSans mx-2 fst-italic"> {tagAdded.status && tagAdded.tag + " " + "Tag Added"}</span>
+          <button type='submit' className="btn btn-outline-primary">Add Tag</button><span className="openSans mx-2 fst-italic"> {tagAdded.status && tagAdded.tag + " " + "Tag Added"}</span>
         </Form>
       </Formik>
+      </div>
     </div>
   )
 }

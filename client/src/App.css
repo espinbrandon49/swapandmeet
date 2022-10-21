@@ -4,6 +4,10 @@
   --bs-light-color: #FBFBFB;
 }
 
+html {
+  background-color: var(--bs-light-color);
+}
+
 .App {
 /* max-width: 768px;
   margin: 0, auto; */
@@ -21,9 +25,9 @@
   border: 2px dotted #E4A11B;
 }
 
-.yellowDotBorder:hover {
+.isLink:hover {
   cursor: pointer;
-  color: #3B71CA;
+  color: #3B71CA !important;
 }
 
 .purpleDotBorder {

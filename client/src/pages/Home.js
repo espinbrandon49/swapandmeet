@@ -28,8 +28,8 @@ const Home = () => {
 
   return (
     <div className='container '>
-      <div className='yellowDotBorder my-5 p-3 d-flex align-items-center flex-wrap'>
-        <h1 className='openSans' onClick={() => navigate(`/profile/${authState.id}`)}>Welcome, {authState.username}</h1>
+      <div className='yellowDotBorder my-5 p-3 d-flex align-items-center flex-wrap bg-white'>
+        <h1 className='openSans isLink' onClick={() => navigate(`/profile/${authState.id}`)}>Welcome, {authState.username}</h1>
 
         <p className='lobster fs-5 text-muted'>A gathering at which enthusiasts or collectors trade or exchange items of common interest</p>
       </div>
@@ -51,7 +51,7 @@ const Home = () => {
         </ListGroup>
       </div>
 
-      <div className='purpleDotBorder'>
+      <div className='purpleDotBorder bg-white'>
         <div className='m-4 bg-light rounded-top pb-3 mb-3 border-5 border-warning border-bottom ' >
           <h5 className="openSans bg-secondary p-3 text-light rounded-top">Add A Category</h5>
           <AddCategory />

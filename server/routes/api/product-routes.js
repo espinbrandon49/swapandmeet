@@ -3,6 +3,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 const multer = require('multer');
 const path = require('path');
 const { validateToken } = require('../../middleWares/AuthMiddlewares');
+const ProductCart = require('../../models/ProductCart');
 
 // The `/api/products` endpoint
 // get all products
@@ -207,19 +208,93 @@ router.put('/productPrice', validateToken, async (req, res) => {
   }
 })
 
-router.put('/productcart', validateToken, async (req, res) => {
-  
-  try {
-    const { cart_id, id } = req.body;
-    await ProductCart.update(
-      { cart_id: cart_id },
-      { where: { id: id } }
-    );
-    res.status(200).json(newProductName)
-  } catch (err) {
-    res.status(400).json(err)
+// create new product
+// router.post('/addtocart', validateToken, (req, res) => {
+//   //req.body should look like this...
+//   console.log(req.body)
+//   let newProduct = {
+//     image: req.body.image,
+//     product_name: req.body.product_name,
+//     username: req.body.username,
+//     price: req.body.price,
+//     stock: req.body.stock,
+//     categoryName: req.body.categoryName,
+//     category_id: req.body.category_id,
+//     userId: req.body.userId,
+//     tagIds: req.body.tagIds
+//   }
+
+//   Product.create(newProduct)
+//     .then((product) => {
+//       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
+//       // if (req.body.tagIds.length) {
+//       //   const productTagIdArr = req.body.tagIds.map((tag_id) => {
+//       //     return {
+//       //       product_id: product.id,
+//       //       tag_id,
+//       //     };
+//       //   });
+//       //   return ProductTag.bulkCreate(productTagIdArr);
+//       // }
+
+//       const product_id = product.id
+//       const cart_id = req.user.id
+//       console.log(product_id, cart_id)
+//       ProductCart.create({ product_id: product_id, cart_id: cart_id })
+//       // if no product tags, just respond
+//       res.status(200).json(newProduct);
+//     })
+//     .then((productTagIds) => res.status(200).json(productTagIds))
+//     .catch((err) => {
+//       // console.log(req.body)
+//       console.log(err);
+//       res.status(400).json(err);
+//     });
+// });
+
+router.post('/addtocart', validateToken, (req, res) => {
+  //req.body should look like this...
+  console.log(req.body)
+  let newProduct = {
+    image: req.body.image,
+    product_name: req.body.product_name,
+    username: req.body.username,
+    price: req.body.price,
+    stock: req.body.stock,
+    categoryName: req.body.categoryName,
+    category_id: req.body.category_id,
+    userId: req.body.userId,
+    tagIds: req.body.tagIds
   }
-})
+console.log(req.body.pid)
+  Product.findByPk(req.body.pid)
+    .then((product) => {
+      // if there's product tags, we need to create pairings to bulk create in the ProductTag model
+      // if (req.body.tagIds.length) {
+      //   const productTagIdArr = req.body.tagIds.map((tag_id) => {
+      //     return {
+      //       product_id: product.id,
+      //       tag_id,
+      //     };
+      //   });
+      //   return ProductTag.bulkCreate(productTagIdArr);
+      // }
+console.log(product)
+      const product_id = product.id
+      const cart_id = req.user.id
+      console.log(product_id, cart_id)
+      ProductCart.create({ product_id: product_id, cart_id: cart_id })
+      // if no product tags, just respond
+      res.status(200).json(newProduct);
+    })
+    // .then((productTagIds) => res.status(200).json(productTagIds))
+    .catch((err) => {
+      // console.log(req.body)
+      console.log(err);
+      res.status(400).json(err);
+    });
+});
+
 module.exports = router;
 
 // update product

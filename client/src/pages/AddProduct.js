@@ -95,9 +95,9 @@ const AddProduct = () => {
   }
 console.log(allCategories.filter((myCategories, id) => myCategories.username === authState.username))
   return (
-    <div className="border border-primary p-3 mb-3">
-      <div className="border border-primary p-3 mb-3">
-        <h3 className="display-6 mb-3">Add A Product</h3>
+    <div className="container openSans">
+      <div className="border border-secondary rounded my-3 p-3 bg-white">
+        <h2 className="mb-3 mx-3">Add A Product</h2>
         <Formik onSubmit={onSubmit} initialValues={initialValues} validationSchema={validationSchema}>
           <Form className="container">
 
@@ -117,7 +117,7 @@ console.log(allCategories.filter((myCategories, id) => myCategories.username ===
               <ErrorMessage name="price" component="div" />
             </div>
 
-            <div className="form-floating mb-3">
+            <div className="form-floating">
               <Field autoComplete="off"
                 className="form-control border border-info"
                 id="stock_nameInput" name="stock" placeholder="(Ex. 10...)" />
@@ -126,8 +126,8 @@ console.log(allCategories.filter((myCategories, id) => myCategories.username ===
             </div>
 
             {!id &&
-              <div>
-                <label>Select Category</label>
+              <div className="my-3">
+                <label className="me-1">Select Category:</label>
                 <ErrorMessage name="category_id" component="div" className="text-danger bg" />
                 <Field as="select"
                   name="category_id"
@@ -137,7 +137,7 @@ console.log(allCategories.filter((myCategories, id) => myCategories.username ===
                   allCategories
                   .filter((myCategories, id) => myCategories.username === authState.username)
                   .map((value, i) => {
-                    return <option key={i} value={[value.id, value.category_name]} label={value.category_name}>value.category_name</option>
+                    return <option  key={i} value={[value.id, value.category_name]} label={value.category_name}>value.category_name</option>
                   })
                   }
                 </Field>

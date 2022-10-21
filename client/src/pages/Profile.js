@@ -48,6 +48,9 @@ const Profile = () => {
   // console.log(userCategories.map((value, i) => value.id))
   // console.log(authState.username)
 
+  console.log(authState.id)
+  console.log(id)
+  console.log(authState.id==id)
   const editUsername = (defaultValue) => {
     let newUsername = prompt('Enter new shop name', defaultValue);
     let uid = authState.id;
@@ -88,7 +91,7 @@ const Profile = () => {
 
         <button onClick={() => editUsername(authState.username)}  > update name</button>
 
-        <img className="yellowDotBorder m-3 p-2" src={`http://localhost:3001/public/image-${image}`} style={styles.width} alt=" " />
+        <img className="yellowDotBorder m-3 p-2 bg-white" src={`http://localhost:3001/public/image-${image}`} style={styles.width} alt=" " />
       </div>
 
       <div className="mb-3" >
@@ -119,21 +122,27 @@ const Profile = () => {
                       <Card
                         style={{ width: '10rem' }}
                         key={product.id + 400}
-                        className="m-3 openSans"
+                        className="m-3 openSans "
                       >
                         <Card.Img
-                          className="p-1"
+                          className="p-1 "
                           variant="top"
                           src={`http://localhost:3001/public/image-${product.image}`} />
                         <Card.Title>{product.product_name}</Card.Title>
-                        <ListGroup className="list-group-flush" key={value.id + 500}>
-                          <ListGroup.Item key={value.id + 600}>Price: {product.price} </ListGroup.Item>
+                        <ListGroup className="list-group-flush " key={value.id + 500}>
+                          <ListGroup.Item className="" key={value.id + 600}>Price: {product.price} </ListGroup.Item>
                           <ListGroup.Item>Stock: {product.stock} </ListGroup.Item>
                         </ListGroup>
                         <Card.Body className="" >
-                          <button type="button" className="btn btn-secondary w-100" onClick={() => {
-                            navigate(`/category/${product.category_id}`);
-                          }}>Update</button>
+                          { authState.id == id 
+                            ? <button type="button" className="btn btn-secondary w-100" onClick={() => {
+                              navigate(`/category/${product.category_id}`);
+                            }}>Update</button>
+                            : <button type="button" className="btn btn-secondary w-100" onClick={() => {
+                              navigate(`/category/${product.category_id}`);
+                            }}>Add To Cart</button>
+                          }
+
                         </Card.Body>
 
                       </Card>

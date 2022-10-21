@@ -36,20 +36,40 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+// //add a product to a user shopping cart
+// router.post('/addtocart', validateToken, async (req, res) => {
+//    const cartProduct = req.body;
+//   //  console.log(cartProduct)
+//   //  cart_id = req.user.id
+//   //  console.log(cart_id)
+//   // console.log(cartProduct, cart_id)
+//   // console.log(req.body)
+//     try {
+//       const cartData = await ProductCart.create(cartProduct)
+//       console.log(cartData)
+//       res.status(200).json(cartData)
+//     } catch (err) {
+//       console.log(cartProduct)
+//       res.status(400).json(err)
+//     }
+// });
+
 //add a product to a user shopping cart
 router.post('/addtocart', validateToken, async (req, res) => {
-   const cartProduct = [req.body.product_id];
-   console.log(cartProduct)
-   cart_id = req.user.id
-   console.log(cart_id)
-  // console.log(cartProduct, cart_id)
-  console.log(req.body)
-    try {
-      const cartData = await ProductCart.bulkCreate(cartProduct, cart_id)
-      res.status(200).json(cartData)
-    } catch (err) {
-      res.status(400).json(err)
-    }
+  const cartProduct = req.body;
+ //  console.log(cartProduct)
+ //  cart_id = req.user.id
+ //  console.log(cart_id)
+ // console.log(cartProduct, cart_id)
+ // console.log(req.body)
+   try {
+     const cartData = await ProductCart.create(cartProduct)
+     console.log(cartData)
+     res.status(200).json(cartData)
+   } catch (err) {
+     console.log(cartProduct)
+     res.status(400).json(err)
+   }
 });
 
 module.exports = router;

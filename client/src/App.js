@@ -102,7 +102,7 @@ function App() {
   // })
 
   return (
-    <div className="App ">
+    <div className="App bg-light">
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <Navbar style={styles.navbar} expand="md" className="">
