@@ -15,9 +15,7 @@ const ProductList = ({ singleCategory }) => {
   const { authState } = useContext(AuthContext);
   const [allCategories, setAllCategories] = useState([]);
   const [shoppingCart, setShoppingCart] = useState({})
-// console.log(tags)
-// console.log(shoppingCart)
-console.log(products)
+
   useEffect(() => {
     axios.get("http://localhost:3001/api/categories").then((response) => {
       setAllCategories(response.data);
@@ -173,40 +171,11 @@ console.log(products)
     window.location.replace(`/category/${id}`)
   }
 
-  //CART ROUTES
-  // const addToCart = (pid) => {
-  //   axios
-  //     .post('http://localhost:3001/api/cart/addtocart',
-  //       {
-  //         product_id: pid,
-  //         cart_id: authState.id  
-  //       },
-  //       {
-  //         headers: { accessToken: localStorage.getItem("accessToken") },
-  //       })
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       // window.location.replace('http://localhost:3000/')
-  //     });
-  // }
-
   //PRODUCT ROUTES
   const addToCart = (pid) => {
-    const productToAdd = products.filter((val) => {
-      return val.id === pid;
-    })
     axios
       .post('http://localhost:3001/api/products/addtocart',
         {
-          // image: productToAdd[0].image,
-          // product_name: productToAdd[0].product_name,
-          // username: productToAdd[0].username,
-          // price: productToAdd[0].price,
-          // stock: productToAdd[0].stock,
-          // categoryName: productToAdd[0].categoryName,
-          // category_id: productToAdd[0].category_id,
-          // userId: productToAdd[0].userId,
-          // tagIds: productToAdd[0].tagIds  
           pid:pid
         },
         {
@@ -214,10 +183,8 @@ console.log(products)
         })
       .then((response) => {
         console.log(response.data)
-        // window.location.replace('http://localhost:3000/')
       });
   }
-
 
   return (
     <div className="container">

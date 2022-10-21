@@ -44,18 +44,6 @@ router.get('/byuserId/:id', async (req, res) => {
   res.json(listOfCategories)
 })
 
-// create a new category
-// router.post('/', validateToken, async (req, res) => {
-//   try {
-//     const category = req.body;
-//     category.userId = req.user.id
-//     await Category.create(category)
-//     res.status(200).json(category)
-//   } catch (err) {
-//     res.status(400).json(err)
-//   }
-// });
-
 router.post('/', validateToken, async (req, res) => {
   try {
     const category = req.body;

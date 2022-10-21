@@ -26,13 +26,8 @@ router.get('/', async (req, res) => {
 });
 
 // get one product
-// find a single product by its `id`
-// be sure to include its associated Category and Tag data
 router.get('/:category_id', async (req, res) => {
   try {
-    // const productData = await Product.findByPk(req.params.id, {
-    //   include: [{ model: Category }, { model: Tag }]
-    // });
     const category_id = req.params.category_id
     const products = await Product.findAll({ where: { category_id: category_id } });
 
@@ -58,7 +53,6 @@ router.get('/productbyuserId/:id', async (req, res) => {
 const storage = multer.diskStorage({
   destination: './public',
   filename: function (req, file, cb) {
-    // cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
     cb(null, file.fieldname + "-" + file.originalname.replace(/\s/g, '').toLowerCase());
   }
 })
@@ -101,11 +95,6 @@ router.post('/upload', (req, res) => {
           msg: 'Error: No File Selected'
         });
       } else {
-        // return res.send({
-        //   success: true,
-        //   file: `http://localhost:3001/public/${req.file.filename}`
-        // })
-        console.log(`http://localhost:3001/public/${req.file.filename}`)
         return res.send(`http://localhost:3001/public/${req.file.filename}`)
       }
     }
@@ -208,88 +197,33 @@ router.put('/productPrice', validateToken, async (req, res) => {
   }
 })
 
-// create new product
-// router.post('/addtocart', validateToken, (req, res) => {
-//   //req.body should look like this...
-//   console.log(req.body)
-//   let newProduct = {
-//     image: req.body.image,
-//     product_name: req.body.product_name,
-//     username: req.body.username,
-//     price: req.body.price,
-//     stock: req.body.stock,
-//     categoryName: req.body.categoryName,
-//     category_id: req.body.category_id,
-//     userId: req.body.userId,
-//     tagIds: req.body.tagIds
-//   }
-
-//   Product.create(newProduct)
-//     .then((product) => {
-//       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-//       // if (req.body.tagIds.length) {
-//       //   const productTagIdArr = req.body.tagIds.map((tag_id) => {
-//       //     return {
-//       //       product_id: product.id,
-//       //       tag_id,
-//       //     };
-//       //   });
-//       //   return ProductTag.bulkCreate(productTagIdArr);
-//       // }
-
-//       const product_id = product.id
-//       const cart_id = req.user.id
-//       console.log(product_id, cart_id)
-//       ProductCart.create({ product_id: product_id, cart_id: cart_id })
-//       // if no product tags, just respond
-//       res.status(200).json(newProduct);
-//     })
-//     .then((productTagIds) => res.status(200).json(productTagIds))
-//     .catch((err) => {
-//       // console.log(req.body)
-//       console.log(err);
-//       res.status(400).json(err);
-//     });
-// });
-
 router.post('/addtocart', validateToken, (req, res) => {
-  //req.body should look like this...
-  console.log(req.body)
-  let newProduct = {
-    image: req.body.image,
-    product_name: req.body.product_name,
-    username: req.body.username,
-    price: req.body.price,
-    stock: req.body.stock,
-    categoryName: req.body.categoryName,
-    category_id: req.body.category_id,
-    userId: req.body.userId,
-    tagIds: req.body.tagIds
-  }
-console.log(req.body.pid)
   Product.findByPk(req.body.pid)
     .then((product) => {
-      // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      // if (req.body.tagIds.length) {
-      //   const productTagIdArr = req.body.tagIds.map((tag_id) => {
-      //     return {
-      //       product_id: product.id,
-      //       tag_id,
-      //     };
-      //   });
-      //   return ProductTag.bulkCreate(productTagIdArr);
-      // }
-console.log(product)
       const product_id = product.id
       const cart_id = req.user.id
-      console.log(product_id, cart_id)
       ProductCart.create({ product_id: product_id, cart_id: cart_id })
       // if no product tags, just respond
-      res.status(200).json(newProduct);
+      res.status(200).json(product);
     })
-    // .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
-      // console.log(req.body)
+      console.log(err);
+      res.status(400).json(err);
+    });
+});
+
+//remove from cart
+router.delete('/removefromcart', validateToken, (req, res) => {
+  Product.findByPk(req.body.pid)
+    .then((product) => {
+
+      ProductCart.destroy({ where : {
+        id: req.params.cid
+      }  })
+      // if no product tags, just respond
+      res.status(200).json(product);
+    })
+    .catch((err) => {
       console.log(err);
       res.status(400).json(err);
     });

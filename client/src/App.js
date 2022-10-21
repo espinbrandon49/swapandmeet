@@ -186,27 +186,23 @@ export default App;
 //footer (DONE)
 //conditionally render categories on addProducts, ideally, you can't add to anyone's category (DONE)
 // Add shopping cart to profile link, and as a new page (DONE)
+// add products "user has many products". (DONE)
+// select products from anyone's shop. (DONE)
 
-// add products "user has many products".
-// select products from anyone's shop.
+
+// register bug: register does not automatically recognize new user
+// remove products from cart
+// ______________________MVP
+
 // subtract from stock
 // sticky footer
 // update shop name 
-// register bug: register does not automatically recognize new user
-// ______________________MVP
-
 // add checkout
 // follow shops
 // make searchable
-// update products on single form. 
+// update products on single form
 // update product images
 // update shop name
 // update username
 // update password 
 // update avatar
-
-//bugs
-  //Categories do not populate immediately, need to reload
-  //Product updates/edits do not populate immediately, need to reload
-  //Product tags do not populate immediately, need to reload
-  //Products can't be deleted immediately, need to reload

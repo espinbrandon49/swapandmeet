@@ -2,9 +2,6 @@ const router = require('express').Router();
 const { Cart, Product, User, ProductCart } = require('../../models');
 const { validateToken } = require('../../middleWares/AuthMiddlewares')
 
-// The `/api/categories` endpoint
-// find all categories
-// be sure to include its associated Products
 router.post('/createCart', validateToken, async (req, res) => {
   try {
     const cart = req.body;
@@ -16,10 +13,6 @@ router.post('/createCart', validateToken, async (req, res) => {
   }
 });
 
-
-// The `/api/categories` endpoint
-// find all categories
-// be sure to include its associated Products
 router.get('/:id', async (req, res) => {
   try {
     const cartData = await Cart.findByPk(req.params.id, {
@@ -35,41 +28,5 @@ router.get('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 })
-
-// //add a product to a user shopping cart
-// router.post('/addtocart', validateToken, async (req, res) => {
-//    const cartProduct = req.body;
-//   //  console.log(cartProduct)
-//   //  cart_id = req.user.id
-//   //  console.log(cart_id)
-//   // console.log(cartProduct, cart_id)
-//   // console.log(req.body)
-//     try {
-//       const cartData = await ProductCart.create(cartProduct)
-//       console.log(cartData)
-//       res.status(200).json(cartData)
-//     } catch (err) {
-//       console.log(cartProduct)
-//       res.status(400).json(err)
-//     }
-// });
-
-//add a product to a user shopping cart
-router.post('/addtocart', validateToken, async (req, res) => {
-  const cartProduct = req.body;
- //  console.log(cartProduct)
- //  cart_id = req.user.id
- //  console.log(cart_id)
- // console.log(cartProduct, cart_id)
- // console.log(req.body)
-   try {
-     const cartData = await ProductCart.create(cartProduct)
-     console.log(cartData)
-     res.status(200).json(cartData)
-   } catch (err) {
-     console.log(cartProduct)
-     res.status(400).json(err)
-   }
-});
 
 module.exports = router;
