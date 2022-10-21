@@ -74,14 +74,29 @@ const Profile = ({ logout }) => {
     logout()
   }
 
+  const addToCart = (pid) => {
+    axios
+      .post('http://localhost:3001/api/products/addtocart',
+        {
+          pid:pid
+        },
+        {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+      .then((response) => {
+        console.log(response.data)
+      });
+  }
+
   return (
     <div className="container text-center ">
 
       <div className="my-3 border-5 border-warning border-bottom pb-1 mx-auto w-75">
         <h1 className="lobster">{authState.username === username ? "Your Shop" : username}</h1>
 
-        <button onClick={() => editUsername(authState.username)}  > update name</button>
-
+        {authState.id == id &&
+          <button onClick={() => editUsername(authState.username)}  > update name</button>
+        }
         <img className="yellowDotBorder m-3 p-2 bg-white" src={`http://localhost:3001/public/image-${image}`} style={styles.width} alt=" " />
       </div>
 
@@ -130,7 +145,7 @@ const Profile = ({ logout }) => {
                               navigate(`/category/${product.category_id}`);
                             }}>Update</button>
                             : <button type="button" className="btn btn-secondary w-100" onClick={() => {
-                              navigate(`/category/${product.category_id}`);
+                              addToCart(product.id);
                             }}>Add To Cart</button>
                           }
                         </Card.Body>
