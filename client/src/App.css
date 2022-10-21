@@ -8,6 +8,17 @@ html {
   background-color: var(--bs-light-color);
 }
 
+.push {
+  height: 75px;
+  }
+
+footer {
+  background-color: #162D5D;
+  color: #fff;
+  height: 50px;
+  padding-top: 10px;
+}
+
 .App {
 /* max-width: 768px;
   margin: 0, auto; */

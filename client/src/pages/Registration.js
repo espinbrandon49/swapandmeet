@@ -73,7 +73,7 @@ const Registration = () => {
 
   return (
     <div className="container">
-      <div className="bg-white p-3 my-3 border rounded border-primary">
+      <div className="bg-white p-3 my-3 border rounded border-secondary">
       <h2 className="openSans mb-3">Registration</h2>
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
         <Form className="">

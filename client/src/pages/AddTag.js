@@ -28,7 +28,7 @@ const AddTag = () => {
       resetForm()
       setTagAdded({status: true, tag: data.tag_name})
       navigate('/')
-      console.log(data)
+
     });
   };
 

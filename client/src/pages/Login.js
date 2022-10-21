@@ -31,7 +31,7 @@ const Login = () => {
 
   return (
     <div className="container">
-      <div className="bg-white border rounded border-primary p-3 my-3 openSans">
+      <div className="bg-white border rounded border-secondary p-3 my-3 openSans">
       <h2 className="openSans mx-3">Log In</h2>
 
       <FloatingLabel

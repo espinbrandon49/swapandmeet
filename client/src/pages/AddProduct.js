@@ -93,7 +93,7 @@ const AddProduct = () => {
         console.log(response)
       })
   }
-console.log(allCategories.filter((myCategories, id) => myCategories.username === authState.username))
+
   return (
     <div className="container openSans">
       <div className="border border-secondary rounded my-3 p-3 bg-white">

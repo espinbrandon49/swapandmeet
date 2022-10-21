@@ -34,12 +34,6 @@ const ProductList = ({ singleCategory }) => {
     });
   }, []);
 
-  if (shoppingCart.user_id === authState.id) {
-    // console.log(shoppingCart)
-  };
-  // console.log(shoppingCart) if shopping cart does not display try this
-  // console.log(Object.keys(shoppingCart).length)
-
   function nameCategory() {
     let categoryName
     if (allCategories.length > 0) {

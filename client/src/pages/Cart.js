@@ -40,10 +40,6 @@ const Cart = () => {
     return total
   }
 
-  // console.log(username)
-  // console.log(cart)
-  console.log(shoppingCart)
-
   const createCart = () => {
     axios.post('http://localhost:3001/api/cart/createCart',
       {},
@@ -57,7 +53,6 @@ const Cart = () => {
   }
 
   const removeFromCart = (event) => {
-    console.log(event.target.value.split(','))
     axios.post("http://localhost:3001/api/products/removefromcart",
       {
         pid: event.target.value.split(',')[1],
@@ -105,7 +100,7 @@ const Cart = () => {
                       <Card.Body>
                         <button
                           type="button"
-                          className="btn btn-outline-danger w-100"
+                          className="btn btn-outline-danger w-100 fs-6"
                           onClick={removeFromCart}
                           value={[value.product_cart.id, value.id]}
                         >Remove From Cart</button>

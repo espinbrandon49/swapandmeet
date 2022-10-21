@@ -12,7 +12,7 @@ const styles = {
   },
 };
 
-const Profile = () => {
+const Profile = ({ logout }) => {
   let { id } = useParams();
   const [username, setUsername] = useState("");
   const [image, setImage] = useState("");
@@ -41,16 +41,6 @@ const Profile = () => {
     });
   }, []);
 
-
-  // console.log(userCategories)
-  // console.log(userProducts)
-  // console.log(userProducts.map((value, i) => value.id))
-  // console.log(userCategories.map((value, i) => value.id))
-  // console.log(authState.username)
-
-  console.log(authState.id)
-  console.log(id)
-  console.log(authState.id==id)
   const editUsername = (defaultValue) => {
     let newUsername = prompt('Enter new shop name', defaultValue);
     let uid = authState.id;
@@ -80,7 +70,8 @@ const Profile = () => {
           });
         }
       });
-    // setAuthState({ ...authState, username: newUsername })
+    setAuthState({ ...authState, username: newUsername })
+    logout()
   }
 
   return (
@@ -134,7 +125,7 @@ const Profile = () => {
                           <ListGroup.Item>Stock: {product.stock} </ListGroup.Item>
                         </ListGroup>
                         <Card.Body className="" >
-                          { authState.id == id 
+                          {authState.id == id
                             ? <button type="button" className="btn btn-secondary w-100" onClick={() => {
                               navigate(`/category/${product.category_id}`);
                             }}>Update</button>
@@ -142,12 +133,9 @@ const Profile = () => {
                               navigate(`/category/${product.category_id}`);
                             }}>Add To Cart</button>
                           }
-
                         </Card.Body>
-
                       </Card>
                     )
-
                     )
                   }
                 </div>
