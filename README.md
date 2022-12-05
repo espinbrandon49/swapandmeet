@@ -10,7 +10,7 @@ Users click a category to shop and add products to their cart.
 Shop by category or enter a users shop by clicking their shop name.
 
 ### [Deployed Link](https://main--lucky-cucurucho-74f5e7.netlify.app/)
-### [GitHub repository](git@github.com:espinbrandon49/swapandmeet.git)
+### [GitHub repository](https://github.com/espinbrandon49/swapandmeet)
 
 ### Tools
 * Client - React, react-bootstrap, Formik, JSX, React-Router-Dom, React hooks, CSS, Netlify
