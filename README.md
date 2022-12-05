@@ -3,7 +3,7 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
 ## Description 
-A full stack e-commerce application fashinoned as an online flea market where users have their own shop and add items to their cart from other shops.  Users maintain their shop by adding categories, products with images, price, stock, and with tags.  Users can also update category names and product specs or remove them entirely.    
+A full stack e-commerce application fashinoned as an online flea market where users have their own shop and add items to their cart from other shops.  Users maintain their shop by adding categories, products with images, price, stock, and with tags.  Users can also update category names and product specs or remove them entirely.   
 
 Users click a category to shop and add products to their cart.  
 
@@ -38,7 +38,7 @@ Swap meet e-commerce experience where users have their own shops and carts, and 
 - Delete products and categories so that your shop is always up to date
 
 ## Demo
-[![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./assets/demo-video-screenshot.png)](https://user-images.githubusercontent.com/102924713/183825504-21e138a0-ba69-4317-9bcd-b6e22738b4e6.mp4)
+[![Demo Video](./assets/demo-video-screenshot.png)](https://user-images.githubusercontent.com/102924713/205544550-1b28d414-3531-46d7-a928-bd788aa978c6.mp4)
 
 ## Installation
 ### Application runs in the browser [here](https://main--lucky-cucurucho-74f5e7.netlify.app/) 
